@@ -1,0 +1,56 @@
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;overflow:hidden;background:#1d211a;color:#eee;font:14px/1.4 -apple-system,system-ui,Segoe UI,Roboto,sans-serif;user-select:none;-webkit-user-select:none;touch-action:none}
+#view,#overlay{position:fixed;inset:0}
+#overlay{pointer-events:none}
+canvas{touch-action:none}
+button{font:inherit;color:#eee;background:#2c3326;border:1px solid #56604a;border-radius:8px;padding:6px 10px;cursor:pointer}
+button:hover{background:#3a4432}
+button.on{background:#6b7b3a;border-color:#a9c062;color:#fff}
+button:disabled{opacity:.4}
+#hud>*{position:fixed}
+#armies{top:calc(8px + env(safe-area-inset-top));left:calc(8px + env(safe-area-inset-left));background:rgba(20,24,18,.82);border-radius:10px;padding:6px 10px;font-size:13px;min-width:220px}
+.army{display:flex;gap:8px;align-items:center;margin:2px 0}
+.dot{width:10px;height:10px;border-radius:50%}
+.bar{flex:1;height:6px;background:#444;border-radius:3px;overflow:hidden;min-width:60px}.bar i{display:block;height:100%}
+#topright{top:calc(8px + env(safe-area-inset-top));right:calc(8px + env(safe-area-inset-right));display:flex;gap:6px}
+#log{top:calc(70px + env(safe-area-inset-top));left:calc(8px + env(safe-area-inset-left));font-size:12px;color:#ddd;text-shadow:0 1px 2px #000;pointer-events:none;max-width:60vw}
+#log div{opacity:.95}
+#panel{left:calc(8px + env(safe-area-inset-left));bottom:calc(8px + env(safe-area-inset-bottom));background:rgba(20,24,18,.85);border-radius:10px;padding:8px;max-width:calc(100vw - 210px)}
+#selInfo{font-size:12px;margin-bottom:6px;color:#cfd8c0}
+#cmds{display:flex;flex-wrap:wrap;gap:6px}
+#groupbar{left:50%;transform:translateX(-50%);top:calc(8px + env(safe-area-inset-top));display:flex;gap:4px;background:rgba(20,24,18,.75);padding:4px;border-radius:10px}
+#groupBtns{display:flex;gap:4px}
+#groupbar button{padding:4px 9px;position:relative}
+#groupbar button sup{font-size:9px;color:#b9d27c;margin-left:2px}
+#minimap{right:calc(8px + env(safe-area-inset-right));bottom:calc(22px + env(safe-area-inset-bottom));width:180px;height:180px;border:2px solid #56604a;border-radius:6px;background:#000}
+#attrib{right:calc(8px + env(safe-area-inset-right));bottom:calc(2px + env(safe-area-inset-bottom));font-size:9px;color:#ccc;text-shadow:0 1px 2px #000;max-width:60vw;text-align:right}
+.screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(10,12,9,.72);overflow:auto;padding:16px}
+.screen[hidden]{display:none}
+#title{background:linear-gradient(rgba(12,14,10,.55),rgba(12,14,10,.85)),url(data/minimap.jpg) center/cover}
+.card{background:rgba(29,33,26,.95);border:1px solid #56604a;border-radius:14px;padding:18px 22px;max-width:860px;width:100%;max-height:100%;overflow:auto}
+.card.narrow{max-width:360px;text-align:center;display:flex;flex-direction:column;gap:10px}
+h1{margin:0;font-size:34px;letter-spacing:1px;color:#e9d9a6}
+.sub{margin:2px 0 14px;color:#b5bca8}
+.sides{display:flex;gap:10px;flex-wrap:wrap}
+.big{font-size:17px;padding:10px 18px}
+.big.allies{background:#4c5a2f}.big.axis{background:#4b4e48}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:640px){.cols{grid-template-columns:1fr}h1{font-size:26px}#panel{max-width:calc(100vw - 150px)}#minimap{width:130px;height:130px}#armies{min-width:0;font-size:11px}}
+h3{margin:10px 0 4px;color:#e9d9a6;font-size:15px}
+ul{margin:0;padding-left:18px}li{margin:2px 0}
+summary{cursor:pointer;margin-top:12px;font-weight:600}
+.small{font-size:12px;color:#aab09d}
+#loading{color:#e9d9a6}
+.touchonly{display:none}
+body.touch .touchonly{display:inline-block}
+@media (max-height:520px){
+  button{padding:4px 8px;font-size:12px}
+  #groupbar button{padding:3px 7px}
+  #minimap{width:120px;height:120px}
+  #armies{font-size:11px;min-width:0;padding:4px 8px;white-space:nowrap}
+  #armies .bar{min-width:40px}
+  #panel{padding:6px;max-width:calc(100vw - 150px)}
+  #selInfo{font-size:11px;margin-bottom:4px}
+  #log{top:calc(52px + env(safe-area-inset-top))}
+  #attrib{font-size:8px;max-width:45vw}
+}

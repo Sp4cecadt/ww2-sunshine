@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>Battle for Sunshine</title>
+<meta name="theme-color" content="#1d211a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Sunshine 44">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="view"></div>
+<canvas id="overlay"></canvas>
+
+<div id="hud" hidden>
+  <div id="armies"></div>
+  <div id="topright">
+    <button id="speedBtn" title="Game speed">1×</button>
+    <button id="pauseBtn" title="Pause (P)">❚❚</button>
+  </div>
+  <div id="log"></div>
+  <div id="groupbar">
+    <button id="saveGroup" title="Save the selection to a group (or Ctrl/Shift + 1–9)">Save</button>
+    <span id="groupBtns"></span>
+  </div>
+  <div id="panel">
+    <div id="selInfo">No units selected</div>
+    <div id="cmds">
+      <button data-cmd="box" id="boxBtn" class="touchonly" title="Box-select mode: drag to select">▢ Select</button>
+      <button data-cmd="all" title="Select all your units">All</button>
+      <button data-cmd="amove" title="Attack-move (F)">Attack-move</button>
+      <button data-cmd="hold" title="Hold position (H)">Hold</button>
+      <button data-cmd="stop" title="Stop (X)">Stop</button>
+      <button data-cmd="unload" id="unloadBtn" title="Unload truck (U)">Unload</button>
+    </div>
+  </div>
+  <canvas id="minimap" width="180" height="180"></canvas>
+  <div id="attrib">Imagery © Esri, Maxar, Earthstar Geographics &amp; GIS User Community · Buildings &amp; roads © OpenStreetMap contributors (ODbL)</div>
+</div>
+
+<div id="title" class="screen">
+  <div class="card">
+    <h1>Battle for Sunshine</h1>
+    <p class="sub">Sunshine, Victoria · a WW2 “what if” · real-time strategy</p>
+    <div class="sides">
+      <button id="playAllies" class="big allies">Play as Allies</button>
+      <button id="playAxis" class="big axis">Play as Germans</button>
+    </div>
+    <p id="loading">Loading the map…</p>
+    <details open>
+      <summary>How to play</summary>
+      <p><b>Goal:</b> destroy the enemy army, or inflict heavy casualties until its morale breaks and it surrenders. Lose 70% of your own army, or let your morale collapse, and you surrender.</p>
+      <div class="cols">
+        <div><h3>Mouse &amp; keyboard</h3><ul>
+          <li>Left-click a unit to select it; drag a box to select any mix of units as one group (Shift adds)</li>
+          <li>Right-click ground: move in formation · right-click an enemy: attack · right-click your truck with infantry selected: board it</li>
+          <li><b>F</b> then click: attack-move · <b>H</b> hold · <b>X</b> stop · <b>U</b> unload truck</li>
+          <li><b>Ctrl</b> or <b>Shift + 1–9</b>: save group · <b>1–9</b>: recall (press twice to jump to it)</li>
+          <li>Camera: <b>WASD</b>/arrows or screen edge to pan, <b>Q/E</b> or right-drag to rotate, wheel to zoom, middle-drag to pan</li>
+          <li><b>P</b>/Esc pause · <b>Space</b> centre on selection</li></ul></div>
+        <div><h3>Touch</h3><ul>
+          <li>Tap a unit to select it; tap ground to move, tap an enemy to attack</li>
+          <li>Box-select: turn on <b>▢ Select</b> and drag, or long-press then drag</li>
+          <li>One finger drags the map; pinch to zoom, twist two fingers to rotate</li>
+          <li>Group bar: tap <b>Save</b> then a number to store the selection; tap a number to recall it</li></ul></div>
+      </div>
+      <h3>Units</h3>
+      <ul class="units">
+        <li><b>Infantry</b>: cheap; much harder to hit inside buildings (they stand on the roof); grenades hurt tanks up close</li>
+        <li><b>Tanks</b>: strong, thick front armour, weak sides and rear; buildings block them</li>
+        <li><b>Artillery</b>: very long range, but only fires at targets a friendly unit can see (spotters)</li>
+        <li><b>Trucks</b>: fast; carry two infantry squads and resupply ammo and morale to units near them</li>
+      </ul>
+      <p class="small">Morale drops with casualties and nearby losses and recovers when units are left alone. Broken units retreat to base until they rally.</p>
+    </details>
+    <p class="small attrib2">Satellite imagery © Esri, Maxar, Earthstar Geographics &amp; GIS User Community. Map data © OpenStreetMap contributors. No real-world events depicted.</p>
+  </div>
+</div>
+
+<div id="pause" class="screen" hidden><div class="card narrow"><h2>Paused</h2>
+  <button id="resume" class="big">Resume</button><button id="restart" class="big">Restart</button><button id="toTitle" class="big">Title screen</button></div></div>
+
+<div id="end" class="screen" hidden><div class="card narrow"><h2 id="endTitle"></h2><p id="endText"></p>
+  <button id="again" class="big">Play again</button><button id="endTitleBtn" class="big">Title screen</button></div></div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
